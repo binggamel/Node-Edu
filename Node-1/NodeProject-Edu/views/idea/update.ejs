@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../header"); %>
+  <body>
+    <%- include("../menu"); %>
+    <form id="updateForm">
+      <!-- Material input -->
+      <div class="md-form">
+        <input
+          type="text"
+          id="title"
+          class="form-control"
+          value="<%= result.title %>"
+          required
+        />
+        <label for="title">Input Title</label>
+      </div>
+
+      <div class="md-form">
+        <input
+          type="text"
+          id="idea"
+          class="form-control"
+          value="<%= result.idea %>"
+          required
+        />
+        <label for="idea">Input idea</label>
+      </div>
+
+      <div class="md-form">
+        <input
+          type="text"
+          id="deadline"
+          class="form-control"
+          value="<%= result.deadline %>"
+          required
+        />
+        <label for="deadline">Input DeadLine</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        Save
+      </button>
+    </form>
+    <%-include("../footer");%>
+    <script>
+      $(function() {
+        $("#updateForm").submit(event => {
+          event.preventDefault(); //껌벅이는거 막아줌
+          //등록
+          const title = $("#title").val();
+          const idea = $("#idea").val();
+          const deadline = $("#deadline").val();
+
+          $.ajax({
+            url: "/api/idea/<%= result._id %>",
+            type: "PUT",
+            data: { channel: "<%= user.channel %>", title, idea, deadline }
+          })
+            .done(() => {
+              location.href = "/api/idea/<%= result._id %>";
+            })
+            .fail((request, status, error) => {
+              alert(request.responseText);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

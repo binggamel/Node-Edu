@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../header"); %>
+  <body>
+    <%- include("../menu"); %>
+
+    <style>
+      #container-background {
+        background: linear-gradient(-80deg, #fff7f3 45%, white 0);
+        height: 100vh;
+        width: 100vw;
+      }
+
+      #container-img {
+        display: block;
+        position: relative;
+        top: 25%;
+        float: right;
+        padding-right: 40vw;
+      }
+
+      #login-card {
+        position: absolute;
+        top: 20vw;
+        right: 0;
+        margin-right: 15vw;
+      }
+
+      #login {
+        width: 450px;
+        border-radius: 35px;
+      }
+
+      #button:hover {
+        background-color: #ff481d !important;
+      }
+
+      #signup-link {
+        font-size: 13px;
+        display: flex;
+        justify-content: center;
+      }
+
+      @media screen and (max-width: 990px) {
+        #container-background {
+          width: 100vw !important;
+        }
+
+        #container-img {
+          display: none;
+        }
+
+        #login-card {
+          position: relative;
+          top: 0vw !important;
+          left: 0% !important;
+          margin-top: 0px;
+          margin-right: 0px;
+        }
+
+        #login {
+          width: 100% !important;
+          border-radius: 0px;
+        }
+      }
+    </style>
+
+    <!-- Material form register -->
+
+    <div
+      id="layout"
+      style="background-color:black; height: 100vh; margin-left: 0px;"
+    >
+      <div id="container-background">
+        <div id="container-img">
+          <img
+            src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fct7eUG%2FbtqTF25H8JT%2F2SmIXMuUuFndjnep9aIDu0%2Fimg.png"
+            alt="asdf"
+            style="width: 50vw; "
+          />
+        </div>
+
+        <div id="login-card" class="form-gradient mb-5">
+          <div id="login" class="card">
+            <div style="margin-bottom : 20px;">
+              <div class="row d-flex justify-content-center">
+                <h3 class="black-text mb-0 py-5 font-weight-bold">시작하기</h3>
+              </div>
+            </div>
+
+            <!--Card content-->
+            <div class="card-body px-lg-5 pt-0">
+              <!-- Form -->
+              <form
+                id="LoginForm"
+                class="text-center"
+                style="color: #757575;"
+                action="#!"
+              >
+                <!-- E-mail -->
+                <div class="md-form mt-0">
+                  <input
+                    type="email"
+                    id="email"
+                    class="form-control"
+                    required
+                  />
+                  <label for="email">이메일</label>
+                </div>
+
+                <!-- Password -->
+                <div class="md-form">
+                  <input
+                    type="password"
+                    id="password"
+                    class="form-control"
+                    required
+                    aria-describedby="materialRegisterFormPasswordHelpBlock"
+                  />
+                  <label for="email">비밀번호</label>
+                </div>
+
+                <!-- Log In button -->
+                <div class="row d-flex align-items-center mb-3 mt-4">
+                  <!--Grid column-->
+                  <div class="col-md-12">
+                    <div class="text-center">
+                      <button
+                        id="button"
+                        type="submit"
+                        class="btn btn-grey btn-rounded z-depth-1a"
+                      >
+                        로그인하기
+                      </button>
+                    </div>
+                  </div>
+                  <!--Grid column-->
+                </div>
+              </form>
+
+              <!-- Form -->
+
+              <div id="signup-link">
+                <a href="/api/user/signup" style="color: #f5a86f;"
+                  >마이엠에듀 회원가입하기</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Material form register -->
+      </div>
+    </div>
+    <%-include("../footer");%>
+    <script>
+      $(function() {
+        $("#LoginForm").submit(event => {
+          event.preventDefault(); //껌벅이는거 막아줌
+          //등록
+          const email = $("#email").val();
+          const password = $("#password").val();
+
+          $.ajax({
+            url: "/api/user/login",
+            type: "POST",
+            data: { email, password }
+          })
+            .done(() => {
+              location.href = "/";
+            })
+            .fail((request, status, error) => {
+              alert(request.responseText);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

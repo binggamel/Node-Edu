@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../header"); %>
+  <body>
+    <%- include("../menu"); %>
+
+    <style>
+      #container-background {
+        background: linear-gradient(-80deg, #fff7f3 45%, white 0);
+        height: 100vh;
+        width: 100vw;
+      }
+
+      #container-img {
+        display: block;
+        position: relative;
+        top: 25%;
+        float: right;
+        padding-right: 40vw;
+      }
+
+      #signup-card {
+        position: absolute;
+        top: 10vw;
+        right: 0;
+        margin-right: 15vw;
+      }
+
+      #signup {
+        width: 450px;
+        border-radius: 35px;
+      }
+
+      #button:hover {
+        background-color: #ff481d !important;
+      }
+
+      @media screen and (max-width: 990px) {
+        #container-background {
+          width: 100vw !important;
+        }
+
+        #container-img {
+          display: none;
+        }
+
+        #signup-card {
+          position: relative;
+          top: 0%;
+          left: 0% !important;
+          margin-top: 0px;
+          margin-right: 0px;
+        }
+
+        #signup {
+          width: 100% !important;
+          border-radius: 0px;
+        }
+      }
+    </style>
+
+    <div
+      id="layout"
+      style="background-color:black; height: 100vh; margin-left: 0px;"
+    >
+      <div id="container-background">
+        <div id="container-img">
+          <img
+            src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fct7eUG%2FbtqTF25H8JT%2F2SmIXMuUuFndjnep9aIDu0%2Fimg.png"
+            alt="asdf"
+            style="width: 50vw; "
+          />
+        </div>
+        <!-- Section: form gradient -->
+        <div id="signup-card">
+          <!--Form with header-->
+          <div id="signup" class="card">
+            <!--Header-->
+            <div class="">
+              <div class="row d-flex justify-content-center">
+                <h3 class="black-text mb-0 py-5 font-weight-bold">
+                  지금 가입하세요!
+                </h3>
+              </div>
+            </div>
+
+            <!--Header-->
+
+            <form id="signupForm" style="color: #757575;" action="#!">
+              <div class="card-body mx-4">
+                <div>
+                  역할을 골라주세요!
+                  <select
+                    id="selected"
+                    class="browser-default custom-select"
+                    onchange="alert_select_value(this);"
+                  >
+                    <option value="" disabled selected>역할 선택!</option>
+                    <option value="Student">학생</option>
+                    <option value="Teacher">선생님</option>
+                  </select>
+                </div>
+
+                <div class="md-form">
+                  <i class="fas fa-user prefix grey-text"></i>
+                  <input type="text" id="name" class="form-control" required />
+                  <label for="name">이름을 입력하세요!</label>
+                </div>
+
+                <div class="md-form" style="padding-bottom: 20px; ">
+                  <i class="fas fa-envelope prefix grey-text"></i>
+                  <input
+                    type="email"
+                    id="email"
+                    class="form-control"
+                    required
+                  />
+                  <label for="email">이메일을 입력해 주세요</label>
+                </div>
+
+                <div class="md-form">
+                  <input
+                    type="password"
+                    id="password-1"
+                    class="form-control"
+                    required
+                    aria-describedby="materialRegisterFormPasswordHelpBlock"
+                  />
+                  <label for="email">비밀번호를 입력해 주세요</label>
+                </div>
+
+                <div class="md-form">
+                  <input
+                    type="password"
+                    id="password-2"
+                    class="form-control"
+                    required
+                    aria-describedby="materialRegisterFormPasswordHelpBlock"
+                  />
+                  <label for="email">비밀번호를 다시 한번 입력해 주세요</label>
+                </div>
+
+                <div class="alert alert-success" id="alert-success">
+                  비밀번호가 일치합니다 :)
+                </div>
+
+                <div class="alert alert-danger" id="alert-danger">
+                  비밀번호가 일치하지 않습니다!
+                </div>
+
+                <!--Grid row-->
+                <div class="row d-flex align-items-center mb-3 mt-4">
+                  <!--Grid column-->
+                  <div class="col-md-12">
+                    <div class="text-center">
+                      <button
+                        id="button"
+                        type="submit"
+                        class="btn btn-grey btn-rounded z-depth-1a"
+                      >
+                        회원가입
+                      </button>
+                    </div>
+                  </div>
+                  <!--Grid column-->
+                </div>
+                <!--Grid row-->
+              </div>
+            </form>
+          </div>
+          <!--/Form with header-->
+        </div>
+      </div>
+    </div>
+
+    <!-- Material form register -->
+    <%-include("../footer");%>
+
+    <script>
+      var alert_select_value = function(select_obj) {
+        // 우선 selectbox에서 선택된 index를 찾고
+        var selected_index = select_obj.selectedIndex;
+        // 선택된 index의 value를 찾고
+        var selected_value = select_obj.options[selected_index].value;
+        //alert(selected_value);
+      };
+
+      $(function() {
+        $("#signupForm").submit(event => {
+          event.preventDefault(); //껌벅이는거 막아줌
+          //등록
+          const name = $("#name").val();
+          const roles = $("#selected option:selected").text();
+          // const channel = $("#channel").val();
+          const email = $("#email").val();
+          const password = $("#password-1").val();
+
+          $.ajax({
+            url: "/api/user/signup",
+            type: "POST",
+            data: { name, roles, email, password }
+          })
+            .done(() => {
+              alert("회원가입 성공!");
+              location.href = "/api/user/login";
+            })
+            .fail((request, status, error) => {
+              alert(request.responseText);
+            });
+        });
+
+        $("#alert-success").hide();
+        $("#alert-danger").hide();
+        $("input").keyup(function() {
+          var pwd1 = $("#password-1").val();
+          var pwd2 = $("#password-2").val();
+          if (pwd1 != "" && pwd2 != "") {
+            if (pwd1 == pwd2) {
+              $("#alert-success").show();
+              $("#alert-danger").hide();
+              $("#submit").removeAttr("disabled");
+            } else {
+              $("#alert-success").hide();
+              $("#alert-danger").show();
+              $("#submit").attr("disabled", "disabled");
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

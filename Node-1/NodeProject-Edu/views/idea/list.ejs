@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../header"); %>
+  <body>
+    <%- include("../menu"); %>
+    <button
+      type="button"
+      class="btn aqua-gradient"
+      style="border-radius: 45px;"
+      onclick="location.href='/api/idea/new'"
+    >
+      Create
+    </button>
+
+    <div class="row row-cols-1 row-cols-md-4" style="padding:2%">
+      <%result.forEach(idea => { %>
+      <div class="col mb-4">
+        <!-- Card -->
+        <div class="card">
+          <!-- Card image -->
+          <div class="view overlay">
+            <img
+              class="card-img-top"
+              src="https://assets.entrepreneur.com/content/3x2/2000/20190613093932-Examples-3-of-Online-Business-Ideas-Bigstock-4000pxW-X-2670pxH-copy.jpeg?width=700&crop=2:1"
+              alt="Card image cap"
+            />
+            <a href="#!">
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body">
+            <!-- Title -->
+            <h4 class="card-title"><%= idea.title %></h4>
+            <!-- Text -->
+            <p class="card-text">
+              <%= idea.director %>
+            </p>
+            <p class="card-text">
+              <%= idea.year %>
+            </p>
+            <!-- Button -->
+            <a
+              href="/api/idea/<%= idea._id %>"
+              class="btn btn-outline-info waves-effect"
+              style="border-radius: 10px;"
+              >More..</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- Card -->
+
+      <% }) %>
+    </div>
+    <%-include("../footer");%>
+  </body>
+</html>

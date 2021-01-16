@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("header"); %>
+  <body>
+    <%- include("menu"); %> <% if (typeof(user) == "undefined" || user === null)
+    { %>
+
+    <!-- Login Before Section -->
+
+    <% } else { %>
+
+    <!-- Login After Section -->
+
+      <div class="row pr-lg-5">
+        <div class="col-md-5 d-flex align-items-center">
+          <div style="padding-left: 30%;">
+            <button
+              type="button"
+              class="btn aqua-gradient"
+              style="border-radius: 45px;"
+              onclick="location.href='/api/upload'"
+            >
+              내 교실
+            </button>
+
+            <button
+              type="button"
+              class="btn aqua-gradient"
+              style="border-radius: 45px;"
+              onclick="location.href='/api/idea'"
+            >
+              수업 개설하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <% } %> <%-include("footer");%>
+  </body>
+</html>

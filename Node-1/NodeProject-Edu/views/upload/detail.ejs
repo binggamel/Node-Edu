@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../header"); %>
+  <body>
+    <%- include("../menu"); %>
+    <!-- Material input -->
+    <button
+      type="button"
+      class="btn btn-flat btn-lg"
+      onclick="location.href='/api/upload'"
+    >
+      List
+    </button>
+
+    <style>
+      #main-content {
+        position: absolute;
+        width: 80%;
+        top: 15%;
+        left: 15%;
+        margin-top: -50px;
+        margin-left: -15px;
+      }
+
+      @media screen and (max-width: 990px) {
+        #main-content {
+          position: relative;
+          float: none;
+          width: 100%;
+          top: 0%;
+          left: 0%;
+          margin-top: 58px;
+          margin-left: 0px;
+        }
+
+        #video-content {
+          width: 100% !important;
+          float: none;
+          width: auto;
+        }
+
+        #comment-content {
+          float: none;
+          width: 100% !important;
+        }
+      }
+    </style>
+
+    <div class="card" id="main-content">
+      <!-- Card -->
+      <div>
+        <div
+          id="video-content"
+          style="width : 45%;
+      float: left;
+      margin-right: 5%;
+      padding : 2%;
+    "
+        >
+          <div class="card">
+            <div class="view overlay">
+              <img
+                class="card-img-top"
+                src="https://i.ytimg.com/vi/<%= items.id.videoId %>/0.jpg"
+                alt="Card image cap"
+              />
+              <a
+                href="https://www.youtube.com/watch?v=<%= items.id.videoId %>"
+                target="_blank"
+              >
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+
+            <div class="card-body">
+              <!-- Title -->
+              <h4 class="card-title"><%= items.snippet.title %></h4>
+              <!-- Text -->
+              <h6 class="card-text">
+                <%= items.snippet.description %>
+              </h6>
+
+              <p class="card-text">
+                <%= items.snippet.publishedAt %>
+              </p>
+              <!-- Button -->
+            </div>
+          </div>
+
+          <!--Material textarea-->
+          <button
+            type="button"
+            class="btn btn-outline-primary btn-rounded waves-effect"
+            style="border-radius: 45px;"
+            onclick="location.href='/api/upload/<%= items.id.videoId %>/new'"
+          >
+            Create
+          </button>
+        </div>
+
+        <div id="comment-content" style="float : left;">
+          <%result.forEach(com => { %>
+          <hr />
+
+          <div class="media" style=" padding : 2%">
+            <i class="fas fa-user prefix grey-text" style="width : 20px;"></i>
+
+            <div class="media-body">
+              <h6 class="mt-0 font-weight-bold blue-text">
+                <%= com.name %> | <%= com.roles %>
+              </h6>
+
+              <pre><strong><%= com.comment %></strong></pre>
+
+              <p style="opacity : 30%;">
+                <%= com.created %>
+              </p>
+            </div>
+          </div>
+
+          <% }) %>
+        </div>
+      </div>
+    </div>
+
+    <%-include("../footer");%>
+  </body>
+</html>

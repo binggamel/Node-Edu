@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../header"); %>
+  <body>
+    <%- include("../menu"); %>
+
+    <div class="row row-cols-1 row-cols-md-4" style="padding:2%">
+      <%items.forEach(item => { %>
+      <div class="col mb-4">
+        <!-- Card -->
+        <div class="card">
+          <!-- Card image -->
+          <div class="view overlay">
+            <img
+              class="card-img-top"
+              src="https://i.ytimg.com/vi/<%= item.id.videoId %>/0.jpg"
+              alt="Card image cap"
+            />
+            <a
+              href="https://www.youtube.com/watch?v=<%= item.id.videoId %>"
+              target="_blank"
+            >
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body">
+            <!-- Title -->
+            <h4 class="card-title"><%= item.snippet.title %></h4>
+            <!-- Text -->
+            <p class="card-text" style="overflow: hidden;">
+              <%= item.snippet.description %>
+            </p>
+            <!-- Button -->
+            <a
+              href="/api/upload/<%= item.id.videoId %>"
+              class="btn btn-outline-primary btn-rounded waves-effect"
+              style="border-radius: 20px; overflow: hidden;"
+              >More..</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- Card -->
+
+      <% }) %>
+    </div>
+    <%-include("../footer");%>
+  </body>
+</html>
