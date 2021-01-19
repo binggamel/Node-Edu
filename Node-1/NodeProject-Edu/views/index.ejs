@@ -2,18 +2,27 @@
 <html lang="en">
   <%- include("header"); %>
   <body>
-    <%- include("menu"); %> <% if (typeof(user) == "undefined" || user === null)
+    <%- include("menu"); %> 
+    
+    <div>MYM Edu ** 항상 보이는 화면 **</div>
+    
+    
+    <% if (typeof(user) == "undefined" || user === null)
     { %>
 
     <!-- Login Before Section -->
+    <div>-------------<br>
+      로그인 전 화면</div>
 
     <% } else { %>
 
     <!-- Login After Section -->
+    <div>-------------<br>
+      로그인 후 화면</div>
 
-      <div class="row pr-lg-5">
+      <div class="row pr-lg-5" style="padding: 0;">
         <div class="col-md-5 d-flex align-items-center">
-          <div style="padding-left: 30%;">
+          <div >
             <button
               type="button"
               class="btn aqua-gradient"

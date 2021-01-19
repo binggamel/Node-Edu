@@ -70,7 +70,7 @@ const login = (req, res) => {
 
       //비밀번호가 맞다면 signed token생성 (json webtoken)
       const token = jwt.sign(user._id.toHexString(), "secretToken");
-      console.log(token);
+      console.log("token : " + token);
 
       /*
 
@@ -130,6 +130,7 @@ const checkAuth = (req, res, next) => {
       if (!result) return res.render("user/login");
       res.locals.user = {
         name: result.name,
+        email: result.email,
         channel: result.channel,
         roles: result.roles,
         role: result.role

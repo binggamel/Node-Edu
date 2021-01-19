@@ -1,0 +1,52 @@
+#container-background {
+  background: linear-gradient(-80deg, #fff7f3 45%, white 0);
+  height: 100vh;
+  width: 100vw;
+}
+
+#container-img {
+  display: block;
+  position: relative;
+  top: 25%;
+  float: right;
+  padding-right: 40vw;
+}
+
+#signup-card {
+  position: absolute;
+  top: 10vw;
+  right: 0;
+  margin-right: 15vw;
+}
+
+#signup {
+  width: 450px;
+  border-radius: 35px;
+}
+
+#button:hover {
+  background-color: #ff481d !important;
+}
+
+@media screen and (max-width: 990px) {
+  #container-background {
+    width: 100vw !important;
+  }
+
+  #container-img {
+    display: none;
+  }
+
+  #signup-card {
+    position: relative;
+    top: 0%;
+    left: 0% !important;
+    margin-top: 0px;
+    margin-right: 0px;
+  }
+
+  #signup {
+    width: 100% !important;
+    border-radius: 0px;
+  }
+}

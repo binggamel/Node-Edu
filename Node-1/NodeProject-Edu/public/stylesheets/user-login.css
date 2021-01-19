@@ -1,0 +1,58 @@
+#container-background {
+  background: linear-gradient(-80deg, #fff7f3 45%, white 0);
+  height: 100vh;
+  width: 100vw;
+}
+
+#container-img {
+  display: block;
+  position: relative;
+  top: 25%;
+  float: right;
+  padding-right: 40vw;
+}
+
+#login-card {
+  position: absolute;
+  top: 20vw;
+  right: 0;
+  margin-right: 15vw;
+}
+
+#login {
+  width: 450px;
+  border-radius: 35px;
+}
+
+#button:hover {
+  background-color: #ff481d !important;
+}
+
+#signup-link {
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 990px) {
+  #container-background {
+    width: 100vw !important;
+  }
+
+  #container-img {
+    display: none;
+  }
+
+  #login-card {
+    position: relative;
+    top: 0vw !important;
+    left: 0% !important;
+    margin-top: 0px;
+    margin-right: 0px;
+  }
+
+  #login {
+    width: 100% !important;
+    border-radius: 0px;
+  }
+}
