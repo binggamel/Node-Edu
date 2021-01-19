@@ -1,10 +1,27 @@
 <style>
-  .nav-left-user {
+  .nav-right-user {
     height: 100%;
     display: flex;
     align-items: center;
-    margin-right: 20px;
   }
+
+  .nav-user-img{
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 80%;
+    overflow: hidden;
+  }
+
+  .bookmark{
+    background-color:#9AF7FF;
+    border:0px;
+    padding: 5px;
+    padding-left: 15px;
+    box-shadow : 0px 1px 5px rgb(198, 198, 198);
+    clip-path: polygon(17px 0, calc(100% - 14px) 0, 100% 0px, 100% calc(100% - 0px), calc(100% - 0px) 100%, 17px 100%, 0 calc(100% - 17px), 0 17px);
+    
+    }
 
   .profile-frame{
     position: absolute;
@@ -13,8 +30,9 @@
     width: 300px;
     height: 300px;
     top: 72px;
-    right: 20px;
+    right: 70px;
   }
+
 
   .profile{
     width: 300px;
@@ -23,7 +41,8 @@
     padding: 10px;
     float: left;
     border-radius: 5px;
-    border:1px solid #E2E2E2;
+    /* border:1px solid #E2E2E2; */
+    box-shadow : 0px 3px 7px rgb(198, 198, 198);
   }
 
   .background-area{
@@ -38,6 +57,7 @@
 
   .profile-user{
     margin-top: 20px;
+    margin-left: 20px;
   }
 
   .profile-user-img{
@@ -67,15 +87,29 @@
     border: 0.5px solid#E2E2E2;
     width: 280px;
     margin-top: 25px;
+    font-size: 15px;
+  }
+
+  .createClass{
+    color: white !important;
+    background-color: #719DFF !important; 
+    padding:8px; 
+    width: 300px; 
+    margin-left: 0; 
+    margin-right: 0; 
+    font-size: 15px;
+    font-weight: bold;
+
   }
   
 </style>
 
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
+<nav class="navbar navbar-expand-lg navbar-light bg-white" style="padding:0px; ">
   <!-- Navbar brand -->
+  
 
-  <a class="navbar-brand" href="/" style="margin-left : 20px;"
+  <a class="navbar-brand" href="/" style="margin-left : 10vw;"
     ><div>
       <img
         src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FMeacn%2FbtqTLxJ7EO6%2FLQki6SCykhjxrSjEgwQ0C1%2Fimg.png"
@@ -117,16 +151,16 @@
 
   <!-- 로그인 아닐때 -->
 
-  <div class="nav-left-user">
+  <div class="nav-right-user">
     <a class="nav-link" href="/api/user/login">
       <button class="btn btn-link" style="padding : 0px;">
         로그인
       </button></a
     >
-    <a class="nav-link" href="/api/user/signup" style="padding: 0px;">
+    <a class="nav-link" href="/api/user/signup" style="margin-right: 10vw;">
       <button
         class="btn btn-danger"
-        style="background-color:#ff481d !important; padding:10px"
+        style="background-color:#719DFF !important; padding:10px"
       >
         회원가입
       </button>
@@ -136,14 +170,21 @@
 </nav>
   <% } else { %>
 
+
   <!-- 로그인 후 -->
 
-  <div class="nav-left-user">
+  <div class="nav-right-user">  
+      <a href="https://zoom.us/j/" target="_blank">
+        <button class="bookmark zoom-link" style="margin-right: 7px;"> 📝 온라인 강의실</button>
+      </a>
+    </div>
+
+  <div class="nav-right-user" style="margin-right : 10vw;">
     <a href="javascript:doDisplay();" class="nav-link">
-      <button class="btn btn-link" style="padding : 0px;">
-        <%= user.name %>님 안녕하세요😊
-      </button></a
-    >
+          <div class="nav-user-img" > 
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuy397E4Wi4BgjTTFsOMctyStVII_fSRP7Rg&usqp=CAU" alt="profile-user-img" class="profile-user-img-img"> 
+            </div>
+      </a>
     
   </div>
 </div>
@@ -179,28 +220,27 @@
         <button class="classic-button"
         style="margin-top: 10px !important;"
         >
-          Logout
+          로그아웃
         </button>
       </a>
     </div>
+
+    <% if (user.roles == "선생님") { %>
 
       <a href="/" style="padding: 0px;">
         <button
-          class="btn btn-danger"
-          style="background-color:#ff481d !important; padding:10px; width: 300px; margin-left: 0; margin-right: 0;"
+          class="btn createClass"
+          
         >
-          교실 개설하기
+        
+        
+        교실 개설하기
+          
         </button>
       </a>
+      <% } %>
         
     </div>
-
-
-    
-
-
-   
-  
     
   </div>
 
