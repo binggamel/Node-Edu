@@ -128,6 +128,7 @@
     aria-controls="basicExampleNav"
     aria-expanded="false"
     aria-label="Toggle navigation"
+    style="margin-right : 10vw; "
   >
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -230,7 +231,7 @@
       <a href="/" style="padding: 0px;">
         <button
           class="btn createClass"
-          
+          onclick="location.href='/api/idea/new'"          
         >
         
         
@@ -238,7 +239,22 @@
           
         </button>
       </a>
-      <% } %>
+      <% } else { %>
+
+        <a href="/" style="padding: 0px;">
+          <button
+            class="btn createClass"
+            onclick="location.href='/api/idea/new'"          
+          >
+          
+          
+          교실 입장하기
+            
+          </button>
+        </a>
+
+
+        <% } %>
         
     </div>
     

@@ -1,4 +1,4 @@
-const IdeaModel = require("../../models/idea");
+const IdeaModel = require("../../models/class");
 const mongoose = require("mongoose");
 
 //유효한 id인지 체크 function
